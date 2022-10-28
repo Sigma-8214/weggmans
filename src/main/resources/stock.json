@@ -1,0 +1,12 @@
+[
+  {
+    "name": "Cool Bean",
+    "price": 10.38,
+    "stock": 63
+  },
+  {
+    "name": "Master Mango",
+    "price": 281.38,
+    "stock": 1
+  }
+]
