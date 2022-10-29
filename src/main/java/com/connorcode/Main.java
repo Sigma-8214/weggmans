@@ -3,7 +3,6 @@ package com.connorcode;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -21,10 +20,13 @@ public class Main {
     static Scanner input = new Scanner(System.in);
 
     public static void main(String[] args) {
+        // Load store stock from stock.json in resources
         String rawStock = Misc.loadResourceString("stock.json");
         for (JsonElement i : JsonParser.parseString(rawStock)
                 .getAsJsonArray())
             items.add(new Item(i));
+
+        // Open the store's main view
         homePage();
     }
 
@@ -137,12 +139,6 @@ public class Main {
         Misc.clear();
         Misc.printHeader(" WEGGMENS CHECKOUT ", maxWidth);
 
-        double totalPrice = 0d;
-        for (Item.CartItem i : cart)
-            totalPrice += items.get(i.stockIndex).price * i.count;
-        if (weggmensMembership) totalPrice += 15;
-        totalPrice += 10 * eggsInNeed;
-
         System.out.println();
         System.out.println("                          |¯¯¯¯¯|");
         System.out.println("     |¯|  ()   |¯¯|  \\_/  | EGG |");
@@ -151,7 +147,7 @@ public class Main {
         System.out.println("    *BEEP*");
 
         System.out.println();
-        System.out.printf("    1) Pay $%.2f\n", totalPrice);
+        System.out.printf("    1) Pay $%.2f\n", Misc.getTotalPrice());
         System.out.println("    2) Buy the weggmens membership card");
         System.out.println("    3) Donate to eggs in need");
 
@@ -177,10 +173,6 @@ public class Main {
         Misc.clear();
         Misc.printHeader(" WEGGMENS PARKING LOT ", maxWidth);
 
-        double totalPrice = 0d;
-        for (Item.CartItem i : cart)
-            totalPrice += items.get(i.stockIndex).price * i.count;
-
         System.out.println();
         System.out.println("    |¯¯¯¯¯¯¯¯¯¯¯¯|");
         System.out.println("    |  WEGGMENS  |__________");
@@ -191,7 +183,7 @@ public class Main {
         System.out.println("  \\____| /|/");
         System.out.println("   o  o  / \\");
         System.out.println();
-        System.out.printf("you quietly sneak out of the store with your %.2f$ of stolen goods\n", totalPrice);
+        System.out.printf("you quietly sneak out of the store with your %.2f$ of stolen goods\n", Misc.getTotalPrice());
     }
 
     static void notifyPage(String notify, int backPage) {
@@ -219,33 +211,3 @@ public class Main {
         }
     }
 }
-
-// go go mango
-/*
-  ======== WEGGMENS CHECKOUT ========
-
-                          |¯¯¯¯¯|
-     |¯|  ()   |¯¯|  \_/  | EGG |
-   (¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯|_____|¯¯¯¯\___
-
-    *BEEP*
-
-    1) Pay $XX.XX
-    2) Buy the weggmens membership card
-    3) Donate to eggs in need
-*/
-
-/*
-==== WEGGMENS PARKING LOT ====
-
-    |¯¯¯¯¯¯¯¯¯¯¯¯|
-    |  WEGGMENS  |__________
-    |                      |
-    |    |¯¯|              |
-    ¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯
-          O
-  \____| /|/
-   o  o  / \
-
-you quietly sneak out of the store with your xx$ of stolen goods
-*/

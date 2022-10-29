@@ -5,6 +5,8 @@ import java.io.InputStreamReader;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+import static com.connorcode.Main.*;
+
 public class Misc {
     public static String loadResourceString(String name) {
         return new BufferedReader(new InputStreamReader(Objects.requireNonNull(Misc.class.getClassLoader()
@@ -12,6 +14,7 @@ public class Misc {
                 .collect(Collectors.joining("\n"));
     }
 
+    // woooooooo logarithms
     public static int countDigits(int inp) {
         if (inp < 0) throw new RuntimeException("Not Implemented on Negatives");
         if (inp == 0) return 1;
@@ -32,5 +35,15 @@ public class Misc {
         int startTextPos = totalWidth / 2 - text.length() / 2;
 
         System.out.println(brd.repeat(startTextPos) + text + brd.repeat(totalWidth - startTextPos - text.length()));
+    }
+
+    public static double getTotalPrice() {
+        double totalPrice = 0d;
+        for (Item.CartItem i : cart)
+            totalPrice += items.get(i.stockIndex).price * i.count;
+        if (weggmensMembership) totalPrice += 15;
+        totalPrice += 10 * eggsInNeed;
+
+        return totalPrice;
     }
 }
