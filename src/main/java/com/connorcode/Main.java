@@ -3,6 +3,7 @@ package com.connorcode;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -15,6 +16,8 @@ public class Main {
     // Global Vars //
     static List<Item> items = new ArrayList<>();
     static List<Item.CartItem> cart = new ArrayList<>();
+    static boolean weggmensMembership = false;
+    static int eggsInNeed = 0;
     static Scanner input = new Scanner(System.in);
 
     public static void main(String[] args) {
@@ -29,8 +32,9 @@ public class Main {
         int items = 0;
         for (Item.CartItem i : cart) items += i.count;
         String[] OPTIONS = new String[]{
-                String.format("Open Cart%s(%d Items)", " ".repeat(maxWidth - 22 - Misc.countDigits(items)),
-                        items),
+                String.format("Open Cart%s(%d Item%s)",
+                        " ".repeat(maxWidth - 22 - Misc.countDigits(items) - (items == 1 ? 0 : 1)),
+                        items, items == 1 ? "" : "s"),
                 "Go Shopping",
                 "Checkout",
                 "*sneak out*"
@@ -55,7 +59,7 @@ public class Main {
                 sneakPage();
                 break;
             default:
-                System.out.println("[-] Unknown Option");
+                notifyPage("Unknown Option", 0);
         }
     }
 
@@ -74,9 +78,20 @@ public class Main {
                     cartItem.count);
         }
 
-        input.nextLine();
-        input.nextLine();
-        homePage();
+        System.out.println();
+        System.out.println("  1) Exit Cart");
+        System.out.println("  2) Clear Cart");
+        switch (input.nextInt()) {
+            case 1:
+                homePage();
+                break;
+            case 2:
+                cart.clear();
+                notifyPage("Cart Cleared", 0);
+                break;
+            default:
+                notifyPage("Unknown Option", 0);
+        }
     }
 
     static void shoppingPage() {
@@ -99,10 +114,11 @@ public class Main {
 
         int toBuy = input.nextInt() - 1;
         if (toBuy == -1) homePage();
-        if (toBuy < 0 || toBuy >= items.size()) homePage();
+        if (toBuy < 0 || toBuy >= items.size())
+            notifyPage(String.format("Value %d is out of range (0 < x < %d)", toBuy + 1, items.size()), 0);
 
         Item item = items.get(toBuy);
-        if (item.stock == 0) notifPage(String.format("We are all out of %s!", item.name), 0);
+        if (item.stock == 0) notifyPage(String.format("We are all out of %s!", item.name), 0);
         item.stock--;
 
         Optional<Item.CartItem> prevItem = cart.stream()
@@ -120,17 +136,68 @@ public class Main {
     static void checkoutPage() {
         Misc.clear();
         Misc.printHeader(" WEGGMENS CHECKOUT ", maxWidth);
+
+        double totalPrice = 0d;
+        for (Item.CartItem i : cart)
+            totalPrice += items.get(i.stockIndex).price * i.count;
+        if (weggmensMembership) totalPrice += 15;
+        totalPrice += 10 * eggsInNeed;
+
+        System.out.println();
+        System.out.println("                          |¯¯¯¯¯|");
+        System.out.println("     |¯|  ()   |¯¯|  \\_/  | EGG |");
+        System.out.println("   (¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯|_____|¯¯¯¯\\___");
+        System.out.println();
+        System.out.println("    *BEEP*");
+
+        System.out.println();
+        System.out.printf("    1) Pay $%.2f\n", totalPrice);
+        System.out.println("    2) Buy the weggmens membership card");
+        System.out.println("    3) Donate to eggs in need");
+
+        switch (input.nextInt()) {
+            case 1:
+                System.out.println("\n*swipe*");
+                break;
+            case 2:
+                if (weggmensMembership) notifyPage("You are already getting the membership card!", 2);
+                weggmensMembership = true;
+                notifyPage("That will be an additional 15$ on your purchase", 2);
+                break;
+            case 3:
+                eggsInNeed++;
+                notifyPage("That will be an additional 10$ on your purchase", 2);
+                break;
+            default:
+                notifyPage("Unknown Option", 2);
+        }
     }
 
     static void sneakPage() {
         Misc.clear();
         Misc.printHeader(" WEGGMENS PARKING LOT ", maxWidth);
+
+        double totalPrice = 0d;
+        for (Item.CartItem i : cart)
+            totalPrice += items.get(i.stockIndex).price * i.count;
+
+        System.out.println();
+        System.out.println("    |¯¯¯¯¯¯¯¯¯¯¯¯|");
+        System.out.println("    |  WEGGMENS  |__________");
+        System.out.println("    |                      |");
+        System.out.println("    |    |¯¯|              |");
+        System.out.println("    ¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯");
+        System.out.println("          O");
+        System.out.println("  \\____| /|/");
+        System.out.println("   o  o  / \\");
+        System.out.println();
+        System.out.printf("you quietly sneak out of the store with your %.2f$ of stolen goods\n", totalPrice);
     }
 
-    static void notifPage(String notif, int backPage) {
+    static void notifyPage(String notify, int backPage) {
         Misc.clear();
         Misc.printHeader(" WEGGMENS NOTIFICATION ", maxWidth);
-        System.out.println(notif);
+        System.out.println(notify);
         input.nextLine();
         input.nextLine();
 
@@ -155,16 +222,6 @@ public class Main {
 
 // go go mango
 /*
-  ======== WEGGMENS CART ========
-  YOUR ITEMS:
-    - Duck Egg .. x23
-    - Cool Bean . x263
-
-  1) Exit Cart
-  2) Empty Cart
-*/
-
-/*
   ======== WEGGMENS CHECKOUT ========
 
                           |¯¯¯¯¯|
@@ -176,4 +233,19 @@ public class Main {
     1) Pay $XX.XX
     2) Buy the weggmens membership card
     3) Donate to eggs in need
+*/
+
+/*
+==== WEGGMENS PARKING LOT ====
+
+    |¯¯¯¯¯¯¯¯¯¯¯¯|
+    |  WEGGMENS  |__________
+    |                      |
+    |    |¯¯|              |
+    ¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯
+          O
+  \____| /|/
+   o  o  / \
+
+you quietly sneak out of the store with your xx$ of stolen goods
 */

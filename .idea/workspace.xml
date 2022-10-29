@@ -4,15 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="44c6e0dc-49e0-4de8-846a-2f69579fd7b2" name="Changes" comment="Init Repo">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/connorcode/Item.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/connorcode/Misc.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/stock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="44c6e0dc-49e0-4de8-846a-2f69579fd7b2" name="Changes" comment="Implament Basic Pages">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/connorcode/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/connorcode/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/stock.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/stock.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -84,7 +79,7 @@
     "settings.editor.selected.configurable": "reference.settingsdialog.project.gradle"
   }
 }]]></component>
-  <component name="RunManager" selected="Gradle.Weggmans [build]">
+  <component name="RunManager" selected="Application.Main">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.connorcode.Main" />
       <module name="Weggmans.main" />
@@ -134,7 +129,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1666911033625</updated>
-      <workItem from="1666911035449" duration="8119000" />
+      <workItem from="1666911035449" duration="12107000" />
     </task>
     <task id="LOCAL-00001" summary="Init Repo">
       <created>1666911092949</created>
@@ -143,7 +138,14 @@
       <option name="project" value="LOCAL" />
       <updated>1666911092949</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Implament Basic Pages">
+      <created>1666919502198</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1666919502198</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -162,6 +164,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Init Repo" />
-    <option name="LAST_COMMIT_MESSAGE" value="Init Repo" />
+    <MESSAGE value="Implament Basic Pages" />
+    <option name="LAST_COMMIT_MESSAGE" value="Implament Basic Pages" />
   </component>
 </project>

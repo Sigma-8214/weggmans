@@ -8,5 +8,40 @@
     "name": "Master Mango",
     "price": 281.38,
     "stock": 1
+  },
+  {
+    "name": "Egg",
+    "price": 0.2,
+    "stock": 826
+  },
+  {
+    "name": "Eggregious Eggs",
+    "price": 125.65,
+    "stock": 1
+  },
+  {
+    "name": "Duck Egg",
+    "price": 0.99,
+    "stock": 271
+  },
+  {
+    "name": "Turkey Egg",
+    "price": 1.15,
+    "stock": 37
+  },
+  {
+    "name": "Goose Egg",
+    "price": 1.15,
+    "stock": 15
+  },
+  {
+    "name": "Quail Egg",
+    "price": 0.8,
+    "stock": 52
+  },
+  {
+    "name": "Surprise Egg",
+    "price": 1.23,
+    "stock": 78
   }
 ]
